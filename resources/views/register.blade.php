@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('nav')
-
     <nav class="navbar navbar-default ">
         <div class="container">
             <div class="navbar-header">
@@ -21,26 +20,16 @@
             </div>
         </div>
     </nav>
-
 @endsection
 
 @section('content')
-    <div id="caixa" class="row" style="margin-top: 150px">
-        <div class="col-sm-3">
+    <h1 style="text-align: center">Registrarse como</h1>
+    <div id="caixa" class="row" style="margin-top: 50px">
+        <div class="col-sm-12 col-md-6">
+            <a href="{{url('/register/visitant')}}" class=" btn btn-info col-sm-12" role="button">Visitante</a>
         </div>
-        <div class="col-sm-6" style="margin: 10px">
-            <h1 style="text-align: center;">¿Estas buscando un artista?</h1>
-            <hr/>
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="sizing-addon1"><i class="material-icons" style="font-size: 17px">search</i></span>
-                <input type="text" class="form-control" placeholder="Search" aria-describedby="sizing-addon1">
-            </div>
+        <div class="col-sm-12 col-md-6">
+            <a href="{{url('/register/artist')}}" class=" btn btn-info col-sm-12" role="button">Artista/Galerista</a>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script type="text/javascript">
-
-    </script>
 @endsection

@@ -8,8 +8,8 @@
     <title>Laravel</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/colores.css" rel="stylesheet">
+    <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url('css/propio.css')}}" rel="stylesheet">
     <!-- Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 </header>
 <body>
 
-<div class="content">
+<div class="content container">
     @yield('content')
 </div>
 
