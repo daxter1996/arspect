@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','dni','surname'
+        'name', 'email', 'password','dni','surname','type'
     ];
 
     /**
@@ -26,4 +26,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function galleries(){
+        return $this->belongsToMany(Gallery::class);
+    }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function followers(){
+        return $this->belongsToMany(User::class, 'followers', 'follow_id', 'user_id');
+    }
+
+    public function following(){
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follow_id')->withTimestamps();
+    }
 }

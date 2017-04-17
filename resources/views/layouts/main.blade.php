@@ -14,8 +14,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{{url('img/favico.png')}}"/>
-
-
 </head>
 <header>
     <nav class="navbar navbar-default ">
@@ -31,23 +29,24 @@
             <div class="collapse navbar-collapse" id="mobileDrop">
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())
-                    <li><a href="{{url('/login')}}" class="navbar-right"> Login </a></li>
-                    <li><a href="{{url('/register')}}" class="navbar-right"> Register </a></li>
+                        <li><a href="{{url('/login')}}" class="navbar-right"> Login </a></li>
+                        <li><a href="{{url('/register')}}" class="navbar-right"> Register </a></li>
                     @else
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{url('/perfil')}}"> Perfil </a></li>
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
@@ -55,6 +54,7 @@
                         </li>
                     @endif
                     <li><a href="{{url('/about')}}" class="navbar-right"> Sobre Nosotros </a></li>
+
                 </ul>
             </div>
         </div>

@@ -89,6 +89,17 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="password-confirm" class="col-md-4 control-label">Registrarse Como</label>
+                            <div class="col-md-6">
+                                <select id="type" class="form-control" name="type" required>
+                                    <option value="1">Usuario</option>
+                                    <option value="2">Galerista</option>
+                                    <option value="3">Artista</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Registrate
