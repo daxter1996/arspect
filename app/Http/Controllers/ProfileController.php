@@ -13,8 +13,8 @@ class ProfileController extends Controller
         return view('perfil');
     }
 
-    function viewProfile(){
-        $users = User::all();
-        return view('profile', compact('users'));
+    function viewProfile($id){
+        $user = User::find($id);
+        return view('profile')->with(['user' => $user]);
     }
 }

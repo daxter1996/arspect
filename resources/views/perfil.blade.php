@@ -3,7 +3,9 @@
 
 @section('content')
     <div id="caixa" class="row">
-        <div class="col-sm-3"><strong>Nom: </strong> {{Auth::user()->name . " " . Auth::user()->surname}}</div>
+        @if(!Auth::guest())
+            <div class="col-sm-3"><strong>Nom: </strong> {{Auth::user()->name . " " . Auth::user()->surname}}</div>
+        @endif
     </div>
 @endsection
 
