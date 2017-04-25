@@ -21,6 +21,15 @@ class CreateObrasTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
+
+        Schema::create('obra_tag', function (Blueprint $table) {
+            $table->integer('obra_id')->unsigned();
+            $table->foreign('obra_id')->references('id')->on('obras')->onDelete('cascade');
+
+            $table->integer('tag_id')->unsigned();
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+
+        });
     }
 
     /**
@@ -32,6 +41,7 @@ class CreateObrasTable extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::dropIfExists('obras');
+        Schema::dropIfExists('obra_tag');
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

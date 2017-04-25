@@ -28,6 +28,15 @@ class CreateTagsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });
+
+        Schema::create('gallery_tag', function (Blueprint $table) {
+            $table->integer('gallery_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
+
+            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+
+        });
     }
 
     /**

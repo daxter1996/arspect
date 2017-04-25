@@ -25,5 +25,12 @@ class DatabaseSeeder extends Seeder
         $this->call(TagTableSeeder::class);
         $this->command->info('Tag table seeded!');
 
+        $this->call(ObrasTableSeeder::class);
+        $this->command->info('Obras table seeded!');
+
+        $this->call(GalleryTableSeeder::class);
+        $this->command->info('Gallery table seeded!');
+
+
     }
 }
