@@ -18,5 +18,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(FollowerTableSeeder::class);
         $this->command->info('Follower table seeded!');
+
+        $this->call(EventsTableSeeder::class);
+        $this->command->info('Events table seeded!');
+
+        $this->call(TagTableSeeder::class);
+        $this->command->info('Tag table seeded!');
+
     }
 }

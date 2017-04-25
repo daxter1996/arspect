@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'MainController@index');
+Route::get('/index', 'MainController@home');
+
 Route::get('/home', 'HomeController@index');
 Route::get('/test', 'testController@index');
 Route::get('/perfil', 'ProfileController@index');
