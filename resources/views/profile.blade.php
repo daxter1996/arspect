@@ -15,14 +15,22 @@
             <li>
                 <div class="collapsible-header"><i class="material-icons">filter_drama</i>Contactar</div>
                 <div class="collapsible-body">
-
-
-
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="textarea1" rows="500" class="materialize-textarea"></textarea>
+                                <label for="textarea1">Motivo</label>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn orange lighten-1">
+                    </form>
                 </div>
             </li>
             <li>
                 <div class="collapsible-header"><i class="material-icons">place</i>Localizacion</div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                <div class="collapsible-body">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3056.9566995328532!2d3.83989131568699!3d39.98707297941734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDU5JzEzLjUiTiAzwrA1MCczMS41IkU!5e0!3m2!1ses!2ses!4v1493191362427" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
             </li>
             <li>
                 <div class="collapsible-header"><i class="material-icons">whatshot</i>Eventos</div>
@@ -38,13 +46,21 @@
                     @endforeach
                     @else
                         <h5>No hay eventos :(</h5>
-
                     @endif
                 </div>
             </li>
         </ul>
+        <div class="col s12 m6 offset-l1" style="margin-top: 5%;">
+            <a class="btn orange lighten-2 grey-text-text col s12" href="#galeria">Galeria</a>
+        </div>
         <div class="col s12 m6 offset-l1 center" style="margin-top: 5%;">
             <img height="300" style="margin: auto;" src="{{url('/img/logo1.png')}}">
+        </div>
+        <div class="col s12 m12 center" style="margin-top: 5%;" id="galeria">
+            <h4>Galeria</h4>
+            @for($i =0 ;$i<10;$i++)
+                <img class="materialboxed col m6 s12"  style="margin-top: 10px" src="http://static.panoramio.com/photos/original/4892830.jpg" data-caption="Silence is Golden">
+            @endfor
         </div>
     </div>
 
@@ -55,6 +71,24 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('.collapsible').collapsible();
+        });
+        $(document).ready(function(){
+            $('.materialboxed').materialbox();
+        });
+
+        // Add smooth scrolling to all links
+        $(document).ready(function(){
+            $("a").on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function(){
+                        window.location.hash = hash;
+                    });
+                }
+            });
         });
     </script>
 @endsection

@@ -14,7 +14,7 @@
 Route::get('/', 'MainController@index');
 Route::get('/index', 'MainController@home');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/search/{name}', 'MainController@search');
 Route::get('/test', 'testController@index');
 Route::get('/perfil', 'ProfileController@index');
 Route::get('/perfil/{id}', 'ProfileController@viewProfile');
