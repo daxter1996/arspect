@@ -34,12 +34,11 @@
                         <label for="first_name">Confirmar Contraseña</label>
                     </div>
                     <div class="input-field col s12">
-                        <label>Materialize Disabled</label>
                         <select name="type">
                             <option value="" disabled>Choose your option</option>
-                            <option value="1" selected>Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                            <option value="1" selected>Usuario</option>
+                            <option value="2">Artista</option>
+                            <option value="3">Galerista</option>
                         </select>
                     </div>
                     <div class="input-field col s12">

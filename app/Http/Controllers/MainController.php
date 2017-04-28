@@ -22,4 +22,8 @@ class MainController extends Controller
         return view('index')->with('users', $users);
     }
 
+    public function about(){
+        return view('about');
+    }
+
 }

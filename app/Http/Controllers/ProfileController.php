@@ -17,4 +17,8 @@ class ProfileController extends Controller
         $user = User::find($id);
         return view('profile')->with(['user' => $user]);
     }
+
+    function personal(){
+        return view('personal');
+    }
 }

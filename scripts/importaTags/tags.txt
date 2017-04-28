@@ -1,0 +1,345 @@
+1:Renacimiento
+2:Manierismo
+3:Barroco
+4:Clasicismo
+5:Rococó
+6:Neoclasicismo 
+7:Prerrafaelismo
+8:Simbolismo 
+9:Cubismo
+10:Contemporáneo 
+11:Fotografía 
+12:Abstracto 
+13:Figurativo
+14:Abstracto figurativo 
+15:Retro 
+16:Naif
+17:Surrealismo contemporáneo 
+18:Moderno contemporáneo 
+19:Pop art
+20:Surrealismo 
+21:Clasicismo moderno
+22:Cubismo 
+23:Arte nuevo 
+24:Fauvismo
+25:Simbolismo 
+26:Expresionismo 
+27:Puntillismo 
+28:Neoimpresionismo 
+29:Post impresionismo 
+30:Impresionismo 
+31:Realismo 
+32:Arte victoriano 
+33:Romanticismo
+34:Arte biedermeier 
+35:Renacimiento tardio  
+36:Bajo renacimiento 
+37:Arte gótico 
+38:Arte romántico 
+39:Arte medieval 
+40:Arte antiguo 
+41:Arte asiatico 
+42:Arte americano 
+43:Íconos 
+44:Acuarela 
+45:Desnudos 
+46:Arte alemán 
+47:Arte gráfico 
+48:Ilustración 
+49:Posters 
+50:Grabados 
+51:Bodegón 
+52:Pablo Picasso 
+53:Picasso
+54:Giotto di Bondone
+55:Leonardo da Vinci 
+56:Paul Cézanne
+57:Cézanne
+58:Rembrandt van Rijn
+59:Diego Velázquez
+60:Velázquez
+61:Wassily Kandinsky
+62:Kandinsky
+63:Claude Monet
+64:Monet
+65:Caravaggio
+66:Joseph Mallord William Turner 
+67:William Turner
+68:Jan Van Eyck
+69:Alberto Durero 
+70:Jackson Pollock
+71:Pollock
+72:Paul Gauguin
+73:Francisco de Goya 
+74:Goya
+75:Vincent Van Gogh
+76:Van Gogh
+77:Édouard Manet
+78:Manet
+79:Mark Rothko
+80:Henri Matisse
+81:Rafael
+82:Jean-Michel Basquiat
+83: Basquiat
+84:Edvard Munch
+85: Munch
+86:Tiziano
+87:Piet Mondrian
+88: Mondrian
+89:Piero della Francesca 
+90:Peter Paul Rubens 
+91:Rubens
+92:Andy Warhol 
+93: Warhol
+94:Joan Miró
+95:Miró
+96:Tommaso Masaccio 
+97:Marc Chagall
+98:Gustave Courbet 
+99:Courbet 
+100:Nicolas Poussin 
+101:Willem de Kooning
+102:Paul Klee
+103:Klee
+104:Francis Bacon 
+105:Bacon
+106:Gustav Klimt 
+107:Klimt 
+108:Eugène Delacroix
+109: Delacroix
+110:Paolo Uccello 
+111:William Blake
+112:Kazimir Malevich
+113:Andrea Mantegna
+114:Jan Vermeer
+115:El Greco
+116:Caspar David Friederich
+117:Winslow Homer
+118:Marcel Duchamp
+119: Duchamp
+120:Giordgione
+121:Frida Kahlo
+122:Hans Holbein el Joven
+123:Edgar Degas
+124: Degas
+125:Fra Angelico
+126:Georges Seurat
+127:Jean-Antoine Watteau 
+128:Salvador Dalí
+129:Dalí
+130:Max Ernst
+131:Tintoretto
+132:Jasper Johns
+133:Sandro Botticelli
+134:Botticelli
+135:David Hockney
+136:Umberto Boccioni
+137:Joachim Patinir
+138:Roger Van Der Weyden
+139:John Constable
+140:Jacques-Louis David 
+141:Arshille Gorky
+142:El Bosco 
+143:Pieter Bruegel el Viejo 
+144:Simone Martini 
+145:Frederich Edwin Church
+146:Edward Hopper
+147:Lucio Fontana 
+148:Franz Marc
+149:Pierre-Auguste Renoir 
+150:James Mcneill Whistler 
+151:Theodore Géricault
+152:William Hogarth
+153:Camille Corot
+154:Georges Braque
+155:Hans Memling
+156:Gerhard Richter
+157:Amadeo Modigliani 
+158:Georges de la Tour 
+159:Artemisia Gentileschi 
+160:Jean François Millet
+161:Francisco de Zurbarán 
+162:James Ensor 
+163:René Magritte
+164:El Lissitzky
+165:Egon Schiele
+166:Dante Gabriel Rossetti
+167:Frans Hals 
+168:Claudio de Lorena 
+169:Roy Lichtenstein 
+170:Gustave Moreau 
+171:Giorgio de Chirico 
+172:Fernand Léger 
+173:Jean-Auguste-Dominique Igres
+174:Joaquin Sorolla
+175:Sorolla
+176:Bartolomé Esteban Murillo 
+177:José de Ribera 
+178:Julio Romero de Torres 
+179:Ignacio Zuloaga y Zabaleta 
+180:Santiago Rusiñol 
+181:Rusiñol 
+182:Federico Madrazo 
+183:Alonso Cano 
+184:Cano 
+185:Mariano Fortuny
+186:Juan de Juanes
+187:Bécquer
+188:Juan Gris
+189:Ignacio Pinazo 
+190:Ramón Casas
+191:Francisco Pacheco 
+192:José Benlliure
+193:Eustaquio Segrelles
+194:Francisco Ribalta
+195:Lahuerta
+196:Luis Meléndez
+197:Paradilla
+198:Eusebio Sempere
+199:Luis de Morales
+200:Eduardo Rosales
+201:José Manaut
+202:Miquel Navarro 
+203:Navarro 
+204:Raimundo de Madrazo
+205:Antonio Utrillo
+206:Utrillo 
+207:Mateo Cerezo
+208:Rafael Canogar 
+209:Antoni Tàpies
+210:Tàpies
+211:Ramon Martí i Alsina 
+212:Juan Carreño de Miranda 
+213:Sotomayor
+214:Juan de Valdés Leal
+215:José Gutiérrez Solana 
+216:José Jiménez Aranda 
+217:Pedro Machuca
+218:Claudio Coello 
+219:Coello 
+220:Joaquím Mir
+221:Juan de Flandes
+222:Aureliano de Beruete
+223:José de Madrazo
+224:Hermengildo Anglada
+225:José Gutiérrez de la Vega 
+226:Carmen Laffon
+227:Laffon
+228:Eduardo Arroyo
+229:Manolo Valdés
+230:Valdés
+231:Jaime Huguet
+232:Huguet
+233:Bernat Martorell
+234:Antonio Lorenzo Carrión 
+235:Juan de Arellano 
+236:Antonio Saura 
+237:Fernando Gallego 
+238:Antonio Lago Rivera
+239:Sebastián Muñoz
+240:Eduardo Chilida
+241:Agustín Redondela 
+242:Darío de Regoyos
+243:Juan de Sevilla 
+244:Miquel Barceló 
+245:Guillermo Pérez Villalta
+246:Juan Uslé
+247:Santiago Sierra
+248:Fernando Calderón 
+249:Calderón 
+250:Marina Núñez
+251:Luis Feito
+252:José Manuel Ballester
+253:Matías Quetglás
+254:Manuel Hernández Mompó 
+255:Joan Ponç
+256:Antonio Clavé
+257:Joaquím Sunyer 
+258:Bernadí Roig
+259:Jaume Plesa
+260:Daniel Argimon
+261:Baleares 
+262:Cataluña
+263:Aragón 
+264:Valencia
+265:Madrid 
+266:Andalucía 
+267:Múrcia
+268:Navarra 
+269:País Vasco 
+270:Castilla la Mancha 
+271:Castilla León 
+272:Galícia 
+273:Asturias 
+274:Cantábria 
+275:Extremadura 
+276:Canárias 
+277:La Rioja
+278:Menorca 
+279:Mallorca
+280:Ibiza 
+281:Formentera
+282:Girona 
+283:Barcelona 
+284:Tarragona 
+285:Lleida 
+286:Castellón 
+287:Valencia 
+288:Alicante
+289:Huesca
+290:Zaragoza
+291:Teruel
+292:Murcia 
+293:Navarra
+294:Guipúzcoa 
+295:Vizcaya 
+296:Alava 
+297:Guadalajara 
+298:Cuenca 
+299:Albacete 
+300:Toledo
+301:Ciudad Real
+302:Jaén 
+303:Granada 
+304:Almería 
+305:Córdoba 
+306:Málaga
+307:Sevilla
+308:Huelva 
+309:Cádiz
+310:Badajoz
+311:Cáceres
+312:Coruña 
+313:Lugo 
+314:Pontevedra
+315:Orense 
+316:León 
+317:Palencia 
+318:Burgos 
+319:Soria 
+320:Segovia 
+321:Avila 
+322:Valladolid 
+323:Salamanca 
+324:Zamora 
+325:Arte Romano 
+326:Arte Griego 
+327:s.I
+328:s.II
+329:s.III
+330:s.IV
+331:s.V
+332:s.VI
+333:s.VIII
+334:s.IX
+335:s.X
+336:s.XI
+337:s.XII
+338:s.XIII
+339:s.XIV
+340:s.XV
+341:s.XVI
+342:s.XVII
+343:s.XVIII
+344:s.XIX
+345:s.XX

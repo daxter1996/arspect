@@ -17,7 +17,10 @@ Route::get('/index', 'MainController@home');
 Route::get('/search/{name}', 'MainController@search');
 Route::get('/test', 'testController@index');
 Route::get('/perfil', 'ProfileController@index');
+Route::get('/personal', 'ProfileController@personal');
 Route::get('/perfil/{id}', 'ProfileController@viewProfile');
+
+Route::get('/about', 'MainController@about');
 
 
 Auth::routes();
