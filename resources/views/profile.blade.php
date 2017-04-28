@@ -16,6 +16,7 @@
                 <div class="collapsible-header"><i class="material-icons">filter_drama</i>Contactar</div>
                 <div class="collapsible-body">
                     <form>
+
                         <div class="row">
                             <div class="input-field col s12">
                                 <textarea id="textarea1" rows="500" class="materialize-textarea"></textarea>
