@@ -16,14 +16,12 @@ class MainController extends Controller
         return view('index');
     }
 
-    public function search($name){
-        $users = User::where('name','like', '%'.$name.'%')->get();
-
-        return view('index')->with('users', $users);
-    }
-
     public function about(){
         return view('about');
+    }
+
+    public function landing(){
+        return view('landing');
     }
 
 }

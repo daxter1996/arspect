@@ -10,11 +10,16 @@
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="{{url("/css/materialize.min.css")}}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{url("/css/materialize.css")}}" media="screen,projection"/>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{{url("/img/favico.png")}}"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!--Token Laravel-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('header')
 </head>
 <header>
     <nav>
@@ -22,7 +27,7 @@
             <!-- Navegacio Esquerra -->
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a class="white-text" href="{{url('/about')}}"> Quiénes somos </a></li>
-                <li><a class="white-text" href=""> Blog </a></li>
+                <li><a class="white-text" href="{{url('/blog')}}"> Blog </a></li>
             </ul>
             <!-- Logo mobil/pc -->
             <a href="{{url('/')}}" class="brand-logo center hide-on-small-and-down"><img src="{{url("/img/logoLetra.png")}}" class="responsive-img" style="height: 58px; margin-left: 20px; margin-top: 5px"></a>
@@ -35,7 +40,12 @@
                     <li><a href="{{url('/register')}}"> Register </a></li>
                 @else
                 <!-- Dropdown Trigger -->
-                    <li><a href="{{url('/personal')}}"> {{ Auth::user()->name }} </a></li>
+                    <li><a href="{{url('/personal')}}">
+                            @if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0)
+                                <i class="material-icons right"><img src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}" alt="Avatar" class="circle responsive-img" style="width: 35px; height: 35px; margin-bottom: -5px"></i>
+                            @endif
+                            {{ Auth::user()->name }}
+                        </a></li>
                     <!--<li><a class="dropdown" href="#!" data-activates="dropdown1"> <i class="material-icons right">arrow_drop_down</i></a></li>-->
                 @endif
             </ul>
@@ -48,33 +58,27 @@
             <li><a href="{{url('/register')}}"> Register </a></li>
         @else
         <!-- Dropdown Trigger -->
-            <li><a class="dropdown" href="#!" data-activates="dropdown1"> {{ Auth::user()->name }}<i
-                            class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="{{url('/personal')}}">
+                    @if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0)
+                        <i class="material-icons right"><img src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}" alt="Avatar" class="circle responsive-img" style="height: 50%;"></i>
+                    @endif
+                    {{ Auth::user()->name . ' ' . Auth::user()->surname}}
+                </a></li>
         @endif
     </ul>
 
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="{{url('/perfil')}}"> Perfil </a></li>
-        <li>
-            <a href="{{ route('logout') }}"
-               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                Logout
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
-        </li>
-    </ul>
+
 </header>
 <body>
-
+    @yield('noContainer')
 <div class="container">
     @yield('content')
 </div>
 
 
 <!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{url("js/materialize.min.js")}}"></script>
 <script type="text/javascript">
     $(".dropdown").dropdown();

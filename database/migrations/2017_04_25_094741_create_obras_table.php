@@ -42,6 +42,7 @@ class CreateObrasTable extends Migration
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::dropIfExists('obras');
         Schema::dropIfExists('obra_tag');
+        Schema::dropIfExists('obra_like');
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

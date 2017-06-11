@@ -54,4 +54,22 @@ class User extends Authenticatable
     public function obras(){
         return $this->hasMany(Obra::class);
     }
+
+    public function addTag($tagName){
+        $tag = Tag::where('type', $tagName)->get();
+        if(count($tag) > 0){
+            return $this->tags()->attach($tag[0]->id);
+        }else{
+            $newTag = new Tag;
+            $newTag->type = $tagName;
+            $newTag->save();
+            return $this->tags()->attach($newTag->id);
+        }
+
+    }
+
+    public function removeTag($tagName){
+        $tag = Tag::where('type', $tagName)->get()->pluck('id');
+        return $this->tags()->detach($tag);
+    }
 }

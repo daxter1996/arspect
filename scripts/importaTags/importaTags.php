@@ -17,7 +17,7 @@
         $data = explode(":",$line);
         $id = $data[0];
         $nom = $data[1];
-        $sql = "insert into tags values ('". $id . "','" . $nom . "','','')";
+        $sql = "insert into tags values ('". $id . "','" . trim($nom, PHP_EOL ). "','','')";
         echo $sql;
         echo "<br/>";
         $conn->query($sql);;

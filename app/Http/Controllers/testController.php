@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use File;
 
 class testController extends Controller
 {
@@ -10,6 +11,12 @@ class testController extends Controller
 
     public function index()
     {
-        return view('test');
+        $fotos = File::glob(public_path().'/img/TEST/*.*');
+        return view('test')->with('obras', $fotos);
+    }
+
+    public function gallery()
+    {
+        return view('testgalery');
     }
 }

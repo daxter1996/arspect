@@ -11,4 +11,8 @@ class Event extends Model
         return $this->hasOne(User::class);
     }
 
+
+    public function add($info){
+
+    }
 }

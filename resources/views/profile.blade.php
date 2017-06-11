@@ -4,10 +4,15 @@
 
     <div class="row" style="margin-top: 30px;">
         <div class="col s12 m5 z-depth-2" style="padding: 20px">
-            <img class="responsive-img col s12 m10 offset-m1 center" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg">
+            <!-- Foto Perfil -->
+            @if(count(Storage::files('public/profile/'.$user->id)) > 0)
+                <img src="{{url('../storage/app/'. Storage::files('/public/profile/'. $user->id)[0])}}" alt="Avatar" class="over-image responsive-img" style="width:100%">
+            @else
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="Avatar" class="over-image responsive-img" style="width:100%">
+            @endif
             <div class="col s12">
                 <h3>{{$user->name . " " . $user->surname}} </h3>
-                <p><strong>Tags:</strong> @foreach($user->tags as $tag) <div class="chip">{{$tag->type}}</div> @endforeach</p>
+                <p><strong>Tags</strong> @foreach($user->tags as $tag) <div class="chip">{{$tag->type}}</div> @endforeach</p>
                 <p><strong>Biografia:</strong> <div>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</div></p>
             </div>
         </div>
@@ -55,13 +60,17 @@
             <a class="btn orange lighten-2 grey-text-text col s12" href="#galeria">Galeria</a>
         </div>
         <div class="col s12 m6 offset-l1 center" style="margin-top: 5%;">
-            <img height="300" style="margin: auto;" src="{{url('/img/logo1.png')}}">
+            @if($user->obras->count() > 0)
+                <img class="z-depth-5 materialboxed responsive-img" height="300" style="margin: auto;" src='{{url('../storage/app/public/profile/'. $user->id . '/obras/' . DB::table('obras')->where('user_id', $user->id)->orderBy('id', 'desc')->first()->url)}}'>
+            @endif
         </div>
         <div class="col s12 m12 center" style="margin-top: 5%;" id="galeria">
             <h4>Galeria</h4>
-            @for($i =0 ;$i<10;$i++)
-                <img class="materialboxed col m6 s12"  style="margin-top: 10px" src="http://static.panoramio.com/photos/original/4892830.jpg" data-caption="Silence is Golden">
-            @endfor
+            @if($user->obras->count() > 0)
+                @foreach($user->obras as $obra)
+                    <img class="col m3 s12 materialboxed" src="{{url("../storage/app/public/profile/". $user->id . "/obras/" .$obra->url)}}"/>
+                @endforeach
+            @endif
         </div>
     </div>
 
@@ -91,5 +100,7 @@
                 }
             });
         });
+
+
     </script>
 @endsection

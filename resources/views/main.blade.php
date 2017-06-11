@@ -7,14 +7,15 @@
             <h2 style="text-align: center;" class="hide-on-med-and-down">¿Estás buscando un artista?</h2>
             <h4 style="text-align: center;" class="hide-on-med-and-up">¿Estás buscando un artista?</h4>
             <br/>
-            <input type="text" class="form-control col s10" placeholder="Buscar artista/galería" aria-describedby="sizing-addon1">
-            <button class="btn orange darken-1">Buscar</button>
+            <form action="{{url('/search')}}" method="post">
+                {{csrf_field()}}
+                <input type="text" class="form-control col s12 m10" placeholder="Buscar artista/galería" name="nombre" aria-describedby="sizing-addon1">
+                <button class="btn orange darken-1">Buscar</button>
+            </form>
+
         </div>
 
-        <div class="col s12 center" style= "margin-top: 20%">
-            <h4>¿Qué somos?</h4>
-            <a href="#queSomos" class="scroll"><img src="{{url('/img/flecha.png')}}" style="height: 100px; margin-bottom: 0px "/></a>
-        </div>
+
 
     </div>
     <hr/>
