@@ -33,4 +33,18 @@ class ObraController extends Controller
 
     }
 
+    public function delete(Request $request){
+        $user = Auth::user();
+        $obra = $user->obras->pluck('id')->toArray();
+
+        if (in_array($request->obraId, $obra)) {
+            $obrabd = Obra::find($request->obraId);
+            Storage::delete('/public/profile/' . $user->id . '/obras/' . $obrabd->url);
+            $obrabd->delete();
+            return "Obra Eliminada";
+        }else{
+            return 'Error!';
+        }
+    }
+
 }

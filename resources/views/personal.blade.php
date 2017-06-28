@@ -144,22 +144,7 @@
             <br/>
             <div id="llistaEvents" class="row">
                 @foreach(Auth::user()->events as $event)
-                    <div class="row">
-                        <div class="col s12 z-depth-2">
-                            <iframe src="https://maps.google.com/maps?q={{explode('/',$event->localizacion)[0]}},{{explode('/',$event->localizacion)[1]}}&hl=es;z=14&amp;output=embed"
-                                    height="300" class="col s12 m6" frameborder="0" style="border:0; margin-left: -20px"
-                                    allowfullscreen></iframe>
-                            <div class="col s12 m6">
-                                <h5>{{$event->nombre}}</h5>
-                                <p>{{$event->descripccion}}</p>
-                            </div>
-                            <form>
-                                <input type="hidden" name="eventId" value="{{$event->id}}">
-                                <a class="btn red darken-1 buttonDeleteEvent">Borrar<i class="left material-icons">delete_forever</i></a>
-                            </form>
-
-                        </div>
-                    </div>
+                   @include('events.event')
                 @endforeach
             </div>
         </div>
@@ -175,10 +160,7 @@
             <div class="row">
                 <br/>
                 @foreach(Auth::user()->obras as $obra)
-                    <div class="col s12 m3">
-                        <a data-position="right" data-delay="0" data-tooltip="Eliminar" style="margin-bottom: -70px; margin-left: 10px" class="tooltipped btn-floating btn-small waves-effect waves-light orange darken-2 removeImage"><i class="small material-icons">remove</i></a>
-                        <img class="responsive-img materialboxed" src="{{url("../storage/app/public/profile/". Auth::user()->id . "/obras/" .$obra->url)}}"/>
-                    </div>
+                    @include('obras.obra')
                 @endforeach
             </div>
         </div>
@@ -221,6 +203,9 @@
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
         </div>
+    </div>
+    <div id="errors">
+
     </div>
 @endsection
 
@@ -317,11 +302,12 @@
 
             $('.buttonDeleteEvent').click(function () {
 
-                var form = $(this).closest('form');
+                var form = $(this).closest('form')[0];
 
                 var formData = new FormData(form);
 
                 $(this).closest('.row').hide('slow');
+
                 $.ajax({
                     url: "{{url('/deleteEvent')}}",
                     type: "POST",
@@ -339,14 +325,34 @@
                 });
             });
 
-           /* $('form').submit(function (event) {
-
-            });*/
 
             $('.removeImage').click(function () {
-                $(this).closest('.col').hide('slow')
-            });
+                var form = $(this).closest('.formasdf')[0];
 
+                var formData = new FormData(form);
+
+                $(this).closest('.col').hide('slow');
+
+                $.ajax({
+                    url: "{{url('/obra/delete')}}",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        //console.log(data);
+                        //$('#errors').html(data);
+                        Materialize.toast(data, 3000)
+                    }, error: function (data) {
+                        var error = data.responseJSON;
+                        console.log(error);
+                        $.each(error, function (key, value) {
+                            Materialize.toast(value[0], 4000);
+                        });
+                    }
+                });
+            });
         });
         /*End Document Ready*/
 

@@ -49,3 +49,4 @@ Route::post('/removeTag', 'ProfileController@removeTag');
 /*--Obra Controller--*/
 
 Route::post('/obra/add', 'ObraController@add');
+Route::post('/obra/delete', 'ObraController@delete');

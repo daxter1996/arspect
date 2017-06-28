@@ -26,8 +26,7 @@ class EventController extends Controller
         return redirect('/personal');
     }
 
-    public function delete(Request $request)
-    {
+    public function delete(Request $request){
         $user = Auth::user();
         $event = $user->events->pluck('id')->toArray();
 
@@ -37,5 +36,5 @@ class EventController extends Controller
         }else{
             return 'Nope Tiu';
         }
-}
+    }
 }
