@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','dni','surname','type'
+        'name', 'email', 'password','surname','type'
     ];
 
     /**
@@ -71,5 +71,9 @@ class User extends Authenticatable
     public function removeTag($tagName){
         $tag = Tag::where('type', $tagName)->get()->pluck('id');
         return $this->tags()->detach($tag);
+    }
+
+    public function extraInfo(){
+        return $this->hasOne(ExtraInfo::class);
     }
 }

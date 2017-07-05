@@ -30,9 +30,15 @@
                 <li><a class="white-text" href="{{url('/blog')}}"> Blog </a></li>
             </ul>
             <!-- Logo mobil/pc -->
-            <a href="{{url('/')}}" class="brand-logo center hide-on-small-and-down"><img src="{{url("/img/logoLetra.png")}}" class="responsive-img" style="height: 58px; margin-left: 20px; margin-top: 5px"></a>
-            <a href="{{url('/')}}" class="brand-logo center hide-on-med-and-up"><img src="{{url("/img/logoLetra.png")}}" class="responsive-img" style="height: 50px; margin-left: 20px; margin-top: 5px"></a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse right"><img height="33" width="40" style="margin-top: 12px" src="{{url('/img/menu.png')}}"></a>
+            <a href="{{url('/')}}" class="brand-logo center hide-on-small-and-down"><img
+                        src="{{url("/img/logoLetra.png")}}" class="responsive-img"
+                        style="height: 58px; margin-left: 20px; margin-top: 5px"></a>
+            <a href="{{url('/')}}" class="brand-logo center hide-on-med-and-up"><img src="{{url("/img/logoLetra.png")}}"
+                                                                                     class="responsive-img"
+                                                                                     style="height: 50px; margin-left: 20px; margin-top: 5px"></a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse right"><img height="33" width="40"
+                                                                                        style="margin-top: 12px"
+                                                                                        src="{{url('/img/menu.png')}}"></a>
             <!-- Navegacio Dreta -->
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 @if(Auth::guest())
@@ -42,7 +48,10 @@
                 <!-- Dropdown Trigger -->
                     <li><a href="{{url('/personal')}}">
                             @if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0)
-                                <i class="material-icons right"><img src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}" alt="Avatar" class="circle responsive-img" style="width: 35px; height: 35px; margin-bottom: -5px"></i>
+                                <i class="material-icons right"><img
+                                            src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}"
+                                            alt="Avatar" class="circle responsive-img"
+                                            style="width: 35px; height: 35px; margin-bottom: -5px"></i>
                             @endif
                             {{ Auth::user()->name }}
                         </a></li>
@@ -60,7 +69,9 @@
         <!-- Dropdown Trigger -->
             <li><a href="{{url('/personal')}}">
                     @if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0)
-                        <i class="material-icons right"><img src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}" alt="Avatar" class="circle responsive-img" style="height: 50%;"></i>
+                        <i class="material-icons right"><img
+                                    src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}"
+                                    alt="Avatar" class="circle responsive-img" style="height: 50%;"></i>
                     @endif
                     {{ Auth::user()->name . ' ' . Auth::user()->surname}}
                 </a></li>
@@ -70,7 +81,9 @@
 
 </header>
 <body>
-    @yield('noContainer')
+
+@yield('noContainer')
+
 <div class="container">
     @yield('content')
 </div>
@@ -79,6 +92,7 @@
 <!--Import jQuery before materialize.js-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="{{url('/js/jQuery.js')}}"></script>
 <script type="text/javascript" src="{{url("js/materialize.min.js")}}"></script>
 <script type="text/javascript">
     $(".dropdown").dropdown();
@@ -119,14 +133,14 @@
                 <a href="https://www.facebook.com/Arspect-245196652605821/" target="_blank"><img class="responsive-img"
                                                                                                  style="height: 50px"
                                                                                                  src="{{url('/img/facebook.png')}}"></a>
-                <a href="" target="_blank"><img class="responsive-img" style="height: 50px"
+                <a href="https://www.instagram.com/arspect_/" target="_blank"><img class="responsive-img" style="height: 50px"
                                                 src="{{url('/img/instagram.png')}}"></a>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container row">
-            <div class="col s12 m3"> © Arspect </div>
+            <div class="col s12 m3"> © Arspect</div>
             <a class="grey-text text-lighten-4 col s12 m3" href="#!">Términos y condiciones</a>
             <a class="grey-text text-lighten-4 col s12 m3" href="#!">Política de privacidad</a>
             <a class="grey-text text-lighten-4 col s12 m3" href="#!">Política de Cookies</a>

@@ -18,10 +18,6 @@
                         <label for="first_name">Apellidos</label>
                     </div>
                     <div class="input-field col s12">
-                        <input placeholder="Nombre" id="dni" type="text" class="validate" name="dni">
-                        <label for="first_name">DNI</label>
-                    </div>
-                    <div class="input-field col s12">
                         <input placeholder="Nombre" id="email" type="email" class="validate" name="email">
                         <label for="first_name">Direccion E-mail</label>
                     </div>

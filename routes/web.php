@@ -50,3 +50,6 @@ Route::post('/removeTag', 'ProfileController@removeTag');
 
 Route::post('/obra/add', 'ObraController@add');
 Route::post('/obra/delete', 'ObraController@delete');
+
+/*Extra Info*/
+Route::post('/extraInfo/save', 'ExtraInfoController@save');
