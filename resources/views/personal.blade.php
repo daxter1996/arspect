@@ -24,21 +24,20 @@
     <div style="min-height: 70vh;">
         <div class="row" style="margin-top: 30px;"><!-- Perfil General -->
             <div id="perfil">
-                <div class="col s12 m5 z-depth-2" style="padding: 20px">
+                <div class="col s12 l5 z-depth-2" style="padding: 20px">
                     <!-- Foto Perfil + Overlay -->
                     <div class="col s12 m12 center">
                         <div class="col s12 over-container">
                             <div>
-                                @if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0)
-                                    <img src="{{url('../storage/app/'. Storage::files('/public/profile/'.Auth::user()->id)[0])}}"
+                                @if(public_path('uploads/profile/' . $user->id . '/' . $user->avatar))
+                                    <img src="{{url('uploads/profile/' . $user->id . '/' . $user->avatar)}}"
                                          alt="Avatar" class="over-image responsive-img" style="width:100%">
                                 @else
                                     <img src="" alt="Avatar" class="over-image responsive-img" style="width:100%">
                                 @endif
                             </div>
                             <div class="over-middle">
-                                <form enctype="multipart/form-data" id="profilePhotoForm"
-                                      action="{{url('/profilePhotoUpload')}}" method="POST">
+                                <form enctype="multipart/form-data" id="profilePhotoForm" action="{{url('/profilePhotoUpload')}}" method="POST">
                                     {{csrf_field()}}
                                     <div class="file-field input-field">
                                         <div class="selectImg btn-floating btn-small waves-effect waves-light red">
@@ -59,10 +58,10 @@
                         <div class="row">
                             <h3> {{Auth::user()->name . " " . Auth::user()->surname}} </h3>
                             <strong>Tags</strong>
-                            <div class="chips"></div>
+                            <div class="chips" style="margin-top: 20px"></div>
                         </div>
                         <div class="row">
-                            <strong>Biografía:</strong>
+                            <strong style="font-weight: bold">Biografía:</strong>
                             <p>@if(Auth::user()->extraInfo != null){{Auth::user()->extraInfo->biografia}} @endif</p>
                         </div>
                         <button id="editarInfoBtn" style="margin-bottom: 20px" class="btn orange darken-2">Editar
@@ -118,7 +117,7 @@
 
                 <!-- Cartilla laterial contacto/events -->
 
-                <ul class="col s12 m6 offset-l1 collapsible " data-collapsible="accordion">
+                <ul class="col s12 l6 offset-l1 collapsible " data-collapsible="accordion">
                     <li>
                         <div class="collapsible-header"><i class="material-icons">contact_mail</i>Contactar</div>
                         <div class="collapsible-body">
@@ -156,12 +155,12 @@
                         </div>
                     </li>
                 </ul>
-                <div class="col s12 m6 offset-l1 center" style="margin-top: 5%;">
-                    @if(Auth::user()->obras()->count() > 0)
+                <div class="col s12 l6 offset-l1 center" style="margin-top: 5%;">
+                    @if($user->obras()->count() > 0)
                         <h5>Ultima Obra</h5>
                         <br/>
                         <img class="z-depth-5 materialboxed responsive-img" height="300" style="margin: auto;"
-                             src='{{url('../storage/app/public/profile/'. Auth::user()->id . '/obras/' . DB::table('obras')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first()->url)}}'>
+                             src='{{url($ultimaObra)}}'>
                     @endif
                 </div>
             </div>
@@ -170,7 +169,7 @@
         <!-- Tab de Events -->
 
         <div id="eventos">
-            <div class="row">
+            <div class="col s12">
                 <a href="{{url('/addEvent')}}"
                    class="btn-floating btn-small waves-effect waves-light orange darken-1"><i
                             class="material-icons">add</i></a>
@@ -188,7 +187,7 @@
         <!-- Tab de Obras -->
 
         <div id="obras">
-            <div class="col s12 m12" id="galeria">
+            <div class="col s12" id="galeria">
                 <a href="#modalGallery" class="btn-floating btn-small waves-effect waves-light orange darken-1">
                     <i class="material-icons">add</i>
                 </a><strong>&nbsp&nbsp;Añadir Obra</strong>

@@ -17,12 +17,20 @@ class EventController extends Controller
 
     public function add(Request $request)
     {
-        $newEvent = new Event;
+        $geoloc = explode('/', $request->geoloc);
+        $lat = $geoloc[0];
+        $lng = $geoloc[1];
+
+        $newEvent = new Event;//Crea el evento
         $newEvent->nombre = $request->eventName;
         $newEvent->descripccion = $request->eventDescription;
         $newEvent->localizacion = $request->geoloc;
+        $newEvent->lat = $lat;
+        $newEvent->lng = $lng;
+        $newEvent->direccion = $request->direccion;
         $newEvent->user_id = Auth::user()->id;
         $newEvent->save();
+
         return redirect('/personal');
     }
 

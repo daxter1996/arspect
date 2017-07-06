@@ -19,13 +19,13 @@
 
         <div class="row" style="margin-top: 30px;"><!-- Perfil General -->
             <div id="perfil">
-                <div class="col s12 m5 z-depth-2" style="padding: 20px">
+                <div class="col s12 l5 z-depth-2" style="padding: 20px">
                     <!-- Foto Perfil + Overlay -->
                     <div class="col s12 m12 center">
 
                         <div>
-                            @if(count(Storage::files('public/profile/'.$user->id)) > 0)
-                                <img src="{{url('../storage/app/'. Storage::files('/public/profile/'.$user->id)[0])}}"
+                            @if(public_path('uploads/profile/' . $user->id . '/' . $user->avatar))
+                                <img src="{{url('uploads/profile/' . $user->id . '/' . $user->avatar)}}"
                                      alt="Avatar" class="over-image responsive-img" style="width:100%">
                             @else
                                 <img src="" alt="Avatar" class="over-image responsive-img" style="width:100%">
@@ -49,7 +49,7 @@
 
                 <!-- Cartilla laterial contacto/events -->
 
-                <ul class="col s12 m6 offset-l1 collapsible " data-collapsible="accordion">
+                <ul class="col s12 l6 offset-l1 collapsible " data-collapsible="accordion">
                     <li>
                         <div class="collapsible-header"><i class="material-icons">contact_mail</i>Contactar</div>
                         <div class="collapsible-body">
@@ -82,12 +82,12 @@
                         </div>
                     </li>
                 </ul>
-                <div class="col s12 m6 offset-l1 center" style="margin-top: 5%;">
+                <div class="col s12 l6 offset-l1 center" style="margin-top: 5%;">
                     @if($user->obras()->count() > 0)
                         <h5>Ultima Obra</h5>
                         <br/>
                         <img class="z-depth-5 materialboxed responsive-img" height="300" style="margin: auto;"
-                             src='{{url('../storage/app/public/profile/'. $user->id . '/obras/' . DB::table('obras')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first()->url)}}'>
+                             src='{{url($ultimaObra)}}'>
                     @endif
                 </div>
             </div>
@@ -96,7 +96,7 @@
         <!-- Tab de Events -->
 
         <div id="eventos">
-            <div class="row">
+            <div class="col s12">
                 <div id="llistaEvents" class="row">
                     @foreach($user->events as $event)
                         @include('events.event')

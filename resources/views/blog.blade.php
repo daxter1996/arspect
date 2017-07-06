@@ -5,7 +5,7 @@
 
     <div class="content">
         <div class="row">
-            <div class="col s12 m8 offset-l2">
+            <div class="col s12 l10 offset-l1">
                 <h3 class="center" style="margin-top: 50px">Blog Arspect</h3>
                 <div class="row">
                     <div class="col s12">
@@ -30,10 +30,7 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
 @endsection
 
 @section('scripts')

@@ -20,6 +20,9 @@
     <!--Token Laravel-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('header')
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ff9800">
 </head>
 <header>
     <nav>
@@ -47,11 +50,8 @@
                 @else
                 <!-- Dropdown Trigger -->
                     <li><a href="{{url('/personal')}}">
-                            @if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0)
-                                <i class="material-icons right"><img
-                                            src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}"
-                                            alt="Avatar" class="circle responsive-img"
-                                            style="width: 35px; height: 35px; margin-bottom: -5px"></i>
+                            @if(Auth::user()->avatar != null)
+                                <i class="material-icons right"><img src="{{url('uploads/profile/' . Auth::user()->id . '/' . Auth::user()->avatar)}}" alt="Avatar" class="circle responsive-img" style="width: 35px; height: 35px; margin-bottom: -5px"></i>
                             @endif
                             {{ Auth::user()->name }}
                         </a></li>
@@ -68,9 +68,9 @@
         @else
         <!-- Dropdown Trigger -->
             <li><a href="{{url('/personal')}}">
-                    @if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0)
+                    @if(Auth::user()->avatar != null)
                         <i class="material-icons right"><img
-                                    src="{{url('../storage/app/'. Storage::files('/public/profile/'. Auth::user()->id)[0])}}"
+                                    src="{{url('uploads/profile/' . Auth::user()->id . '/' . Auth::user()->avatar)}}"
                                     alt="Avatar" class="circle responsive-img" style="height: 50%;"></i>
                     @endif
                     {{ Auth::user()->name . ' ' . Auth::user()->surname}}

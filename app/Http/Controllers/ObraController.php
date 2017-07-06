@@ -6,32 +6,47 @@ use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Obra;
+use Intervention\Image\Facades\Image;
 
 class ObraController extends Controller
 {
 
-    public function add(Request $request){
+    public function add(Request $request)
+    {
 
-        if ($request->hasFile('obraFoto')){
-           $newObra = new Obra();
-           $url = last(explode('/', Storage::putFile('public/profile/'.Auth::user()->id . '/obras', $request->file('obraFoto'))));
-           $obraName = $request->name;
-           $descrObra = $request->descripcion;
+        if ($request->hasFile('obraFoto')) {
 
-           $newObra->nombre = $obraName;
-           $newObra->descripccion = $descrObra;
-           $newObra->url = $url;
+            $avatar = $request->file('obraFoto');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
 
-           Auth::user()->obras()->save($newObra);
+            $user = Auth::user();
 
-           return redirect('personal');
+            $newObra = new Obra();
+            $newObra->nombre = $request->name;
+            $newObra->descripccion = $request->descripcion;
+            $newObra->user_id = $user->id;
+            $newObra->url = $filename;
 
+            $pathToSave = 'uploads/profile/' . $user->id . '/obras/' . $filename;
+            $path = 'uploads/profile/' . $user->id . '/obras';
 
+            if (!file_exists($path)) {//Genera la ruta del directori si no existeix amb permisos per linux
+                mkdir($path, 0777, true);
+            }
+
+            Image::make($avatar->getRealPath())->resize(null, 600, function ($c) {
+                $c->aspectRatio();
+            })->save($pathToSave);
+
+            $newObra->save();
+
+            return redirect('personal');
         } else {
-            return "No image";
+            return 'NoImage';
         }
-
     }
+
+
 
     public function delete(Request $request){
         $user = Auth::user();

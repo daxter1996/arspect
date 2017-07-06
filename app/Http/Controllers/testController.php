@@ -12,7 +12,7 @@ class testController extends Controller
     public function index()
     {
         $fotos = File::glob(public_path().'/img/TEST/*.*');
-        return view('test')->with('obras', $fotos);
+        return view('test2')->with('obras', $fotos);
     }
 
     public function gallery()

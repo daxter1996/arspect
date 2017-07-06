@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -17,11 +18,25 @@ class ProfileController extends Controller
 
     function viewProfile($id){
         $user = User::find($id);
-        return view('profile')->with(['user' => $user]);
+
+        $ultimaObra = $user->obras;
+        if (count($ultimaObra) > 0){
+            $ultimaObra = 'uploads/profile/' . $user->id . '/obras/' . last(last($ultimaObra))->url;
+        }
+
+        return view('profile', compact('user'), compact('ultimaObra'));
     }
 
     function personal(){
-        return view('personal');
+
+        $user = Auth::user();
+
+        $ultimaObra = $user->obras;
+        if (count($ultimaObra) > 0){
+            $ultimaObra = 'uploads/profile/' . $user->id . '/obras/' . last(last($ultimaObra))->url;
+        }
+
+        return view('personal', compact('user'), compact('ultimaObra'));
     }
 
     public function search(Request $request){
@@ -37,6 +52,27 @@ class ProfileController extends Controller
 
     public function uploadProfilePhoto(Request $request){
         if($request->hasFile('profileImg')){
+            $avatar = $request->file('profileImg');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $user = Auth::user();
+            $pathToSave = 'uploads/profile/'. $user->id . '/' . $filename;
+
+            if (!file_exists('uploads/profile/'. $user->id )) {//Genera la ruta del directori si no existeix amb permisos per linux
+                mkdir('uploads/profile/'. $user->id , 0777, true);
+            }
+
+            Image::make($avatar->getRealPath())->resize(null, 600, function ($c){
+                $c->aspectRatio();
+            })->save( $pathToSave );
+            $user->avatar = $filename;
+            $user->update();
+            return redirect('personal');
+        }else{
+            dd('NoImage');
+        }
+
+
+       /* if($request->hasFile('profileImg')){
             if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0){
                 $old = Storage::files('public/profile/'.Auth::user()->id)[0];
                 $oldName = explode('/', $old)[3];
@@ -46,7 +82,7 @@ class ProfileController extends Controller
             return redirect('personal');
         }else{
             return "No image";
-        }
+        }*/
     }
 
     public function addTag(Request $request){
