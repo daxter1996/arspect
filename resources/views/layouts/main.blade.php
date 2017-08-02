@@ -20,9 +20,15 @@
     <!--Token Laravel-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('header')
-
+    <!-- Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#ff9800">
+
+    <!-- IOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#ff9800">
+    <link rel="apple-touch-icon" href="{{url("/img/favico.png")}}">
+
 </head>
 <header>
     <nav>
@@ -44,24 +50,28 @@
                                                                                         src="{{url('/img/menu.png')}}"></a>
             <!-- Navegacio Dreta -->
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <!--<li><a href="{{url('/asdf')}}"> Cerca de mi <i class="material-icons right">place</i> </a></li>-->
                 @if(Auth::guest())
                     <li><a href="{{url('/login')}}"> Login </a></li>
-                    <li><a href="{{url('/register')}}"> Register </a></li>
+                    <li><a href="{{url('/register')}}"> Registrarte </a></li>
                 @else
                 <!-- Dropdown Trigger -->
-                    <li><a href="{{url('/personal')}}">
+                    <li><a href="{{url('/home')}}">
                             @if(Auth::user()->avatar != null)
                                 <i class="material-icons right"><img src="{{url('uploads/profile/' . Auth::user()->id . '/' . Auth::user()->avatar)}}" alt="Avatar" class="circle responsive-img" style="width: 35px; height: 35px; margin-bottom: -5px"></i>
                             @endif
                             {{ Auth::user()->name }}
                         </a></li>
-                    <!--<li><a class="dropdown" href="#!" data-activates="dropdown1"> <i class="material-icons right">arrow_drop_down</i></a></li>-->
+                    @if(Auth::user()->type == 3)
+                        <li><a class="white-text" href="{{url('/admin')}}"> BackOffice </a></li>
+                    @endif
                 @endif
             </ul>
         </div>
     </nav>
 
     <ul class="side-nav" id="mobile-demo">
+        <li><a href="{{url('/asdf')}}"> Cerca de mi <i class="material-icons right">place</i> </a></li>
         @if(Auth::guest())
             <li><a href="{{url('/login')}}"> Login </a></li>
             <li><a href="{{url('/register')}}"> Register </a></li>
@@ -119,7 +129,9 @@
                         <li><a class="white-text" href="{{url('/login')}}"> Login </a></li>
                         <li><a class="white-text" href="{{url('/register')}}"> Register </a></li>
                     @else
-                    <!-- Dropdown Trigger -->
+                        @if(Auth::user()->type == 3)
+                            <li><a class="white-text" href="{{url('/admin')}}"> BackOffice </a></li>
+                        @endif
                         <li><a class="white-text" href="{{url('/personal')}}"> {{ Auth::user()->name }} </a></li>
                         <!--<li><a class="dropdown" href="#!" data-activates="dropdown1"> <i class="material-icons right">arrow_drop_down</i></a></li>-->
                     @endif
@@ -141,8 +153,8 @@
     <div class="footer-copyright">
         <div class="container row">
             <div class="col s12 m3"> © Arspect</div>
-            <a class="grey-text text-lighten-4 col s12 m3" href="#!">Términos y condiciones</a>
-            <a class="grey-text text-lighten-4 col s12 m3" href="#!">Política de privacidad</a>
+            <a class="grey-text text-lighten-4 col s12 m3" href="{{url('terminos-y-condiciones')}}">Términos y condiciones</a>
+            <a class="grey-text text-lighten-4 col s12 m3" href="{{url('politica-de-privacidad')}}">Política de privacidad</a>
             <a class="grey-text text-lighten-4 col s12 m3" href="#!">Política de Cookies</a>
         </div>
     </div>

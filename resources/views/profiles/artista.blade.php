@@ -118,20 +118,7 @@
                 <!-- Cartilla laterial contacto/events -->
 
                 <ul class="col s12 l6 offset-l1 collapsible " data-collapsible="accordion">
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">contact_mail</i>Contactar</div>
-                        <div class="collapsible-body">
-                            <form>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <textarea id="textarea1" rows="500" class="materialize-textarea"></textarea>
-                                        <label for="textarea1">Motivo</label>
-                                    </div>
-                                </div>
-                                <input type="submit" class="btn orange lighten-1">
-                            </form>
-                        </div>
-                    </li>
+
                     <li>
                         <div class="collapsible-header"><i class="material-icons">place</i>Localización</div>
                         <div class="collapsible-body">
@@ -177,7 +164,7 @@
                 <br/>
                 <br/>
                 <div id="llistaEvents" class="row">
-                    @foreach(Auth::user()->events as $event)
+                    @foreach($user->events as $event)
                         @include('events.event')
                     @endforeach
                 </div>
@@ -193,7 +180,7 @@
                 </a><strong>&nbsp&nbsp;Añadir Obra</strong>
                 <div class="row">
                     <br/>
-                    @foreach(Auth::user()->obras as $obra)
+                    @foreach($user->obras()->orderBy('created_at','desc')->get() as $obra)
                         @include('obras.obra')
                     @endforeach
                 </div>
@@ -371,7 +358,6 @@
                 });
             });
 
-
             $('.removeImage').click(function () {
                 var form = $(this).closest('.formasdf')[0];
 
@@ -399,6 +385,7 @@
                     }
                 });
             });
+
         });
         /*End Document Ready*/
 

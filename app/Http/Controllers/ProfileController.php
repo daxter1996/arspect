@@ -27,25 +27,30 @@ class ProfileController extends Controller
         return view('profile', compact('user'), compact('ultimaObra'));
     }
 
-    function personal(){
+    function home(){
 
         $user = Auth::user();
 
+
         $ultimaObra = $user->obras;
+
         if (count($ultimaObra) > 0){
             $ultimaObra = 'uploads/profile/' . $user->id . '/obras/' . last(last($ultimaObra))->url;
         }
 
-        return view('personal', compact('user'), compact('ultimaObra'));
-    }
+        /*Tria la vista TODO Fer aso amb un middleweare en un futur*/
 
-    public function search(Request $request){
-        $users = User::where('name','like', '%'.$request->input('nombre').'%')->get();
-        return view('index')->with('users', $users);
+        if(Auth::user()->type == 2){
+            return view('profiles.artista', compact('user'), compact('ultimaObra'));
+        }else{
+            return view('profiles.user', compact('user'));
+        }
+
+
     }
 
     public function buscar(Request $request){
-        $users = User::where('name','like', '%'.$request->name.'%')->get();
+        $users = User::where('type', 2)->where('name','like', '%'.$request->name.'%')->orWhere('surname','like', '%'.$request->name.'%')->get();
         return view('widgets.search')->with('users', $users);
 
     }
@@ -66,11 +71,10 @@ class ProfileController extends Controller
             })->save( $pathToSave );
             $user->avatar = $filename;
             $user->update();
-            return redirect('personal');
+            return redirect('home');
         }else{
             dd('NoImage');
         }
-
 
        /* if($request->hasFile('profileImg')){
             if(count(Storage::files('public/profile/'.Auth::user()->id)) > 0){

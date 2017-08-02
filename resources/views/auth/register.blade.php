@@ -1,44 +1,43 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="min-height: 80vh">
         <div class="row">
             <div class="col s12">
-                <h1 class="center">Register</h1>
+                <h1 class="center">Registrarte</h1>
             </div>
             <div class="row">
                 <form role="form" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
-                    <div class="input-field col s12">
-                        <input placeholder="Nombre" id="name" type="text" class="validate" name="name">
+                    <div class="input-field col s12 l6">
+                        <input placeholder="" id="name" type="text" class="validate" name="name">
                         <label for="first_name">Nombre</label>
                     </div>
-                    <div class="input-field col s12">
-                        <input placeholder="Nombre" id="surname" type="text" class="validate" name="surname">
-                        <label for="first_name">Apellidos</label>
+                    <div class="input-field col s12 l6">
+                        <input placeholder="" id="apellidos" type="text" class="validate" name="surname">
+                        <label for="apellidos">Apellidos</label>
                     </div>
                     <div class="input-field col s12">
-                        <input placeholder="Nombre" id="email" type="email" class="validate" name="email">
+                        <input placeholder="" id="email" type="email" class="validate" name="email">
                         <label for="first_name">Direccion E-mail</label>
                     </div>
-                    <div class="input-field col s12">
-                        <input placeholder="Nombre" id="password" type="password" class="validate" name="password">
+                    <div class="input-field col s12 l6">
+                        <input placeholder="" id="password" type="password" class="validate" name="password">
                         <label for="first_name">Contraseña</label>
                     </div>
-                    <div class="input-field col s12">
-                        <input placeholder="Nombre" id="password-confirm" type="password" class="validate" name="password_confirmation">
+                    <div class="input-field col s12 l6">
+                        <input placeholder="" id="password-confirm" type="password" class="validate" name="password_confirmation">
                         <label for="first_name">Confirmar Contraseña</label>
                     </div>
                     <div class="input-field col s12">
-                        <select name="type">
-                            <option value="" disabled>Choose your option</option>
-                            <option value="1" selected>Usuario</option>
+                        <select id="type" name="type">
+                            <option value="1" selected>Coleccionista</option>
                             <option value="2">Artista</option>
-                            <option value="3">Galerista</option>
                         </select>
+                        <label for="type">Tipo de usuario</label>
                     </div>
                     <div class="input-field col s12">
-                        <input type="submit" class="btn" value="Registrarse">
+                        <input type="submit" class="btn orange darken-2" value="Registrarse">
                     </div>
                 </form>
             </div>

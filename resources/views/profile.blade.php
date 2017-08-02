@@ -54,6 +54,14 @@
                         <div class="collapsible-header"><i class="material-icons">contact_mail</i>Contactar</div>
                         <div class="collapsible-body">
                             <form>
+                                @if(!Auth::user())
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input type="email" placeholder="Email" id="email">
+                                            <label for="email"></label>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <textarea id="textarea1" rows="500" class="materialize-textarea"></textarea>
@@ -67,7 +75,7 @@
                     <li>
                         <div class="collapsible-header"><i class="material-icons">place</i>Localización</div>
                         <div class="collapsible-body">
-                           <div style="display: none">
+                            <div style="display: none">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.7776367884426!2d4.652552516016148!3d51.48059577963073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c41c4ed2a6d579%3A0x251c503b97429b04!2sKlein-Zundert%2C+Pa%C3%ADses+Bajos!5e0!3m2!1ses!2ses!4v1493240024096"
                                         width="100%" height="400" frameborder="0" style="border:0"
                                         allowfullscreen></iframe>
@@ -84,7 +92,7 @@
                 </ul>
                 <div class="col s12 l6 offset-l1 center" style="margin-top: 5%;">
                     @if($user->obras()->count() > 0)
-                        <h5>Ultima Obra</h5>
+                        <h5>Última Obra</h5>
                         <br/>
                         <img class="z-depth-5 materialboxed responsive-img" height="300" style="margin: auto;"
                              src='{{url($ultimaObra)}}'>
@@ -99,7 +107,7 @@
             <div class="col s12">
                 <div id="llistaEvents" class="row">
                     @foreach($user->events as $event)
-                        @include('events.event')
+                        @include('events.event1')
                     @endforeach
                 </div>
             </div>
@@ -111,8 +119,8 @@
             <div class="col s12 m12" id="galeria">
                 <div class="row">
                     <br/>
-                    @foreach($user->obras as $obra)
-                        @include('obras.obra')
+                    @foreach($user->obras()->orderBy('created_at', 'desc')->get() as $obra)
+                        @include('obras.obra1')
                     @endforeach
                 </div>
             </div>
@@ -153,7 +161,40 @@
                     });
                 }
             });
-        });
+
+            $('.likeObra').click(function () {
+                var form = $(this).closest('.formObra')[0];
+                var button = $(this);
+                var formData = new FormData(form);
+
+                $.ajax({
+                    url: "{{url('/like/add')}}",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == 1) {
+                            console.log(data);
+                            button.addClass('green');
+                            button.find('i').html('thumb_down');
+                            var likes = parseInt(button.closest('.row').find('.numLikes').html());
+                            button.closest('.row').find('.numLikes').html(likes + 1);
+                        } else {
+                            console.log('dislike');
+                        }
+                    }, error: function (data) {
+                        var error = data.responseJSON;
+                        console.log(error);
+                        $.each(error, function (key, value) {
+                            Materialize.toast(value[0], 4000);
+                        });
+                    }
+                });
+            });
+
+        });//end Document ready
 
         $(document).ready(function () {
             $('.tooltipped').tooltip({delay: 50});
@@ -167,6 +208,9 @@
 
         /*Form IMG*/
 
+        $('.noLogin').click(function () {
+            Materialize.toast("Debes registrarte para dar like", 2000);
+        });
 
     </script>
 

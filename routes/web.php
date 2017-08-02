@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckArtist;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +18,10 @@ Route::get('/index', 'MainController@home');
 Route::get('/test', 'testController@index');
 Route::get('/testg', 'testController@gallery');
 Route::get('/perfil', 'ProfileController@index');
-Route::get('/personal', 'ProfileController@personal');
+Route::get('/home', 'ProfileController@home');
 Route::get('/perfil/{id}', 'ProfileController@viewProfile');
 Route::get('/landing', 'MainController@landing');
+Route::get('/search', 'MainController@search');
 
 /*---Main---*/
 Route::get('/about', 'MainController@about');
@@ -30,16 +33,11 @@ Route::get('/blog', 'BlogController@index');
 Route::post('/subscriber', 'SubscriberController@add');
 
 /*--Event Controller--*/
-
-Route::get('/addEvent', 'EventController@addPage');
 Route::post('/addEvent', 'EventController@add');
 Route::post('/deleteEvent', 'EventController@delete');
-
 Auth::routes();
 
 /*--Post--*/
-
-Route::post('/search', ['as' => 'search', 'uses' => 'ProfileController@search']);
 Route::post('/buscar', ['as' => 'buscar', 'uses' => 'ProfileController@buscar']);
 Route::post('/profilePhotoUpload', 'ProfileController@uploadProfilePhoto');
 Route::post('/addTag', 'ProfileController@addTag');
@@ -47,9 +45,28 @@ Route::post('/removeTag', 'ProfileController@removeTag');
 
 
 /*--Obra Controller--*/
-
 Route::post('/obra/add', 'ObraController@add');
 Route::post('/obra/delete', 'ObraController@delete');
 
+
 /*Extra Info*/
 Route::post('/extraInfo/save', 'ExtraInfoController@save');
+
+/*Like*/
+Route::post('/like/add', 'LikeController@add');
+
+/*Legal*/
+Route::get('/terminos-y-condiciones', 'MainController@terminos');
+Route::get('/politica-de-privacidad', 'MainController@politica');
+
+/*Grup Artistes*/
+Route::group(['middleware' => [CheckArtist::class]], function (){
+    Route::get('/addEvent', 'EventController@addPage');
+
+});
+
+/*Grup Admins*/
+Route::group(['middleware' => [CheckAdmin::class]], function (){
+    Route::get('/admin', 'AdminController@general');
+    Route::get('/validacion', 'AdminController@validacion');
+});

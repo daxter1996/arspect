@@ -24,4 +24,16 @@ class MainController extends Controller
         return view('landing');
     }
 
+    public function search(Request $request){
+        $users = User::where('type',2)->where('active',1)->where('name','like', '%' . $request->nombre . '%')->orWhere('surname','like', '%' . $request->nombre . '%')->get();
+        return view('index', compact('users'));
+    }
+
+    public function terminos(){
+     return view('legal.terminos');
+    }
+
+    public function politica(){
+        return view('legal.politica');
+    }
 }

@@ -4,7 +4,7 @@
 
 
 
-    <div class="container">
+    <div class="container" style="min-height: 70vh">
         <div class="row">
             <div class="col s12">
                 <h1 class="center">Login</h1>

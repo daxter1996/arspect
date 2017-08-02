@@ -1,13 +1,21 @@
 @foreach($users as $user)
     <div class="row">
-        <a href="{{url('/perfil/' . $user->id)}}"  class=" col s12 z-depth-1 black-text">
-            <div class="col s12" style="padding: 10px">
-                <p><strong>{{$user->name . " " . $user->surname}}</strong></p>
-                <strong>Tags</strong>
-                @foreach($user->tags as $tag)
-                    <div class="chip">{{$tag->type}}</div>
-                @endforeach
-            </div>
-        </a>
+        <div class="col s3">
+            <img class="responsive-img"
+                 src="{{url('/uploads/profile/' . $user->id . '/' . $user->avatar)}}">
+        </div>
+        <div class="col s9">
+            <a href="{{url('/perfil/' . $user->id)}}" class=" black-text">
+                <div class="col s12" style="padding: 10px">
+                    <h4><strong>{{$user->name . " " . $user->surname}}</strong></h4>
+                    @foreach($user->tags as $tag)
+                        <div class="chip orange lighten-3"><a href=""
+                                                              class="black-text">{{$tag->type}}</a>
+                        </div>
+                    @endforeach
+                </div>
+            </a>
+        </div>
     </div>
+    <hr/>
 @endforeach
