@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="content" style="min-height: 70vh">
+    <div class="" style="min-height: 70vh">
         <h3 class="center" style="margin-top: 50px">Vista General</h3>
         <p>Visitas web</p>
         <p>Total Artistas: {{$totalArtistas}}</p>

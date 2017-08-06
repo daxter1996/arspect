@@ -29,11 +29,14 @@
                     <div class="col s12 l6 center">
                         <div class="col s12 over-container">
                             <div>
-                                @if(public_path('uploads/profile/' . $user->id . '/' . $user->avatar))
-                                    <img src="{{url('uploads/profile/' . $user->id . '/' . $user->avatar)}}"
-                                         alt="Avatar" class="over-image responsive-img" style="width:100%">
+                                @if($user->avatar != null)
+                                    @if(public_path('uploads/profile/' . $user->id . '/' . $user->avatar))
+                                        <img src="{{url('uploads/profile/' . $user->id . '/' . $user->avatar)}}"
+                                             alt="Avatar" class="over-image responsive-img" style="width:100%">
+                                    @endif
                                 @else
-                                    <img src="" alt="Avatar" class="over-image responsive-img" style="width:100%">
+                                    <img src="{{url('/img/noImage.png')}}" alt="Avatar"
+                                         class="over-image responsive-img" style="width:100%">
                                 @endif
                             </div>
                             <div class="over-middle">
@@ -67,7 +70,7 @@
                         </button>
                     </div>
 
-                    <div id="editarInfo" class="col s12" style="margin-bottom: 20px; margin-top: 20px; display: none">
+                    <div id="editarInfo" class="col s12 m5" style="margin-bottom: 20px; margin-top: 20px; display: none">
                         <!-- Cartilla Informacio de usuari-->
                         <form method="post" action="{{url('extraInfo/save')}}">
                             {{csrf_field()}}

@@ -5,34 +5,20 @@
     <div class="" style="min-height: 70vh">
         <br/>
         <div class="row">
-            <form class="col s12 l6" method="POST" action="{{url('/addEvent')}}">
-                <h5>Informacion del evento</h5>
+            <form class="col s12 l6" method="POST" action="{{url('/addLocation')}}">
+                <h5>Localización</h5>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="eventName" type="text" name="eventName" class="validate">
-                        <label for="eventName">Nombre Del Evento</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="eventDescription">Descripcion del Evento</label>
-                        <textarea id="eventDescription" name="eventDescription" class="materialize-textarea"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
                         <input id="eventDirection" type="text" name="eventDirection" class="validate">
-                        <label for="eventDirection">Dirección Del Evento</label>
+                        <label for="eventDirection">Dirección Del Artista</label>
                     </div>
                 </div>
 
                 <input type="hidden" id="geoloc" name="geoloc">
                 <input type="hidden" id="direccion" name="direccion">
 
-                <input type="submit" value="Añadir Evento" class="btn orange darken-1">
+                <input type="submit" value="Guardar" class="btn orange darken-1">
             </form>
             <div id="googleMap" style="height: 400px" class="col s12 l6"></div>
         </div>
@@ -110,5 +96,5 @@
         initialize();
     </script>
 
-
 @endsection
+

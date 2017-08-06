@@ -25,7 +25,8 @@ class MainController extends Controller
     }
 
     public function search(Request $request){
-        $users = User::where('type',2)->where('active',1)->where('name','like', '%' . $request->nombre . '%')->orWhere('surname','like', '%' . $request->nombre . '%')->get();
+        $users = User::where('type',2)->whereRaw("concat(name, ' ', surname) like '%" . $request->nombre . "%'")->get();
+
         return view('index', compact('users'));
     }
 

@@ -17,6 +17,12 @@ class EventController extends Controller
 
     public function add(Request $request)
     {
+
+        $this->validate($request, [
+            'geoloc' => 'required',
+            'direccion' => 'required',
+        ]);
+
         $geoloc = explode('/', $request->geoloc);
         $lat = $geoloc[0];
         $lng = $geoloc[1];
@@ -31,7 +37,7 @@ class EventController extends Controller
         $newEvent->user_id = Auth::user()->id;
         $newEvent->save();
 
-        return redirect('/personal');
+        return redirect('/home');
     }
 
     public function delete(Request $request){

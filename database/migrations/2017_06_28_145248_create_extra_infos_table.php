@@ -18,6 +18,13 @@ class CreateExtraInfosTable extends Migration
             $table->integer('user_id');
             $table->text('biografia')->nullable();
             $table->string('dni')->nullable();
+            $table->string('location_name')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('web')->nullable();
             $table->timestamps();
         });
     }

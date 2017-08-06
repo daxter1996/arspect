@@ -2,8 +2,6 @@
 
 @section('header')
 
-
-
 @endsection
 
 @section('noContainer')
@@ -15,13 +13,45 @@
             <li class="tab col s3 "><a class="white-text" href="#perfil">Vista general</a></li>
             <li class="tab col s3"><a class="white-text " href="#eventos">Eventos</a></li>
             <li class="tab col s3"><a class="white-text " href="#obras">Galeria</a></li>
+
         </ul>
     </div>
 
 @endsection
 
 @section('content')
-    <div style="min-height: 70vh;">
+
+    <div style="min-height: 70vh; margin-top: 30px;">
+
+        @if($user->active == false)
+            @if($user->extraInfo != null)
+                @if($user->extraInfo->dni == null)
+                    <div class="red darken-2 z-depth-2 white-text center" style="border-radius: 3px; padding: 10px">
+                        Tu cuenta no esta validada<br/>
+                        Recuerda insertar el <span style="font-weight: bold">DNI</span> para que tu cuenta pueda ser
+                        validada<br/>
+                        Puede encontrarlo haciendo click en "editar informacion"
+                    </div>
+                @endif
+            @else
+                <div class="red darken-2 z-depth-2 white-text center" style="border-radius: 3px; padding: 10px">
+                    Tu cuenta no esta validada<br/>
+                    Recuerda insertar el <span style="font-weight: bold">DNI</span> para que tu cuenta pueda ser
+                    validada<br/>
+                    Puede encontrarlo haciendo click en "editar informacion"
+                </div>
+            @endif
+
+            @if($user->extraInfo != null)
+                @if($user->active == false && $user->extraInfo->dni)
+                    <div class="orange darken-4 z-depth-2 white-text center" style="border-radius: 3px; padding: 10px">
+                        Cuenta en proceso de validación<br/>
+                        Mientras tanto ya puedes empezar a editar tu perfil
+                    </div>
+                @endif
+            @endif
+        @endif
+
         <div class="row" style="margin-top: 30px;"><!-- Perfil General -->
             <div id="perfil">
                 <div class="col s12 l5 z-depth-2" style="padding: 20px">
@@ -29,15 +59,19 @@
                     <div class="col s12 m12 center">
                         <div class="col s12 over-container">
                             <div>
-                                @if(public_path('uploads/profile/' . $user->id . '/' . $user->avatar))
-                                    <img src="{{url('uploads/profile/' . $user->id . '/' . $user->avatar)}}"
-                                         alt="Avatar" class="over-image responsive-img" style="width:100%">
+                                @if($user->avatar != null)
+                                    @if(public_path('uploads/profile/' . $user->id . '/' . $user->avatar))
+                                        <img src="{{url('uploads/profile/' . $user->id . '/' . $user->avatar)}}"
+                                             alt="Avatar" class="over-image responsive-img" style="width:100%">
+                                    @endif
                                 @else
-                                    <img src="" alt="Avatar" class="over-image responsive-img" style="width:100%">
+                                    <img src="{{url('/img/noImage.png')}}" alt="Avatar"
+                                         class="over-image responsive-img" style="width:100%">
                                 @endif
                             </div>
                             <div class="over-middle">
-                                <form enctype="multipart/form-data" id="profilePhotoForm" action="{{url('/profilePhotoUpload')}}" method="POST">
+                                <form enctype="multipart/form-data" id="profilePhotoForm"
+                                      action="{{url('/profilePhotoUpload')}}" method="POST">
                                     {{csrf_field()}}
                                     <div class="file-field input-field">
                                         <div class="selectImg btn-floating btn-small waves-effect waves-light red">
@@ -102,6 +136,39 @@
                                     <label for="biografia">Biografia</label>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" id="facebook" name="facebook" placeholder="Arspect-245196652605821"
+                                           value="@if(Auth::user()->extraInfo != null){{Auth::user()->extraInfo->facebook}} @endif">
+                                    <label for="facebook">Facebook</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" id="twitter" name="twitter" placeholder="arspect"
+                                           value="@if(Auth::user()->extraInfo != null){{Auth::user()->extraInfo->twitter}} @endif">
+                                    <label for="twitter">Twitter</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" id="instagram" name="instagram" placeholder="arspect_"
+                                           value="@if(Auth::user()->extraInfo != null){{Auth::user()->extraInfo->instagram}} @endif">
+                                    <label for="instagram">Instagram</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" id="web" name="web" placeholder="www.arspect.com"
+                                           value="@if(Auth::user()->extraInfo != null){{Auth::user()->extraInfo->web}} @endif">
+                                    <label for="web">Pagina Web</label>
+                                </div>
+                            </div>
+
                             <input type="submit" class="btn button orange darken-2" value="Guardar Información">
                         </form>
                         <br/>
@@ -111,34 +178,37 @@
                             <input type="submit" class="button btn orange darken-2" value="LogOut">
                         </form>
                     </div>
-
+                    <div class="col s12" style="margin-top: 5%;">
+                        <i class="material-icons left">remove_red_eye</i>{{$user->views}}
+                    </div>
 
                 </div>
 
                 <!-- Cartilla laterial contacto/events -->
 
                 <ul class="col s12 l6 offset-l1 collapsible " data-collapsible="accordion">
-
                     <li>
                         <div class="collapsible-header"><i class="material-icons">place</i>Localización</div>
                         <div class="collapsible-body">
-                            <div class="row"><a class="btn-floating btn-small waves-effect waves-light orange darken-1"><i
+                            <div class="row"><a href="{{url('/location/edit')}}"
+                                                class="btn-floating btn-small waves-effect waves-light orange darken-1"><i
                                             class="material-icons">add</i></a> <strong>&nbsp;&nbsp;Editar
                                     Localizacion</strong>
                             </div>
-
-                            <div style="display: none">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.7776367884426!2d4.652552516016148!3d51.48059577963073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c41c4ed2a6d579%3A0x251c503b97429b04!2sKlein-Zundert%2C+Pa%C3%ADses+Bajos!5e0!3m2!1ses!2ses!4v1493240024096"
-                                        width="100%" height="400" frameborder="0" style="border:0"
-                                        allowfullscreen></iframe>
-                            </div>
                             <div>
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.7776367884426!2d4.652552516016148!3d51.48059577963073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c41c4ed2a6d579%3A0x251c503b97429b04!2sKlein-Zundert%2C+Pa%C3%ADses+Bajos!5e0!3m2!1ses!2ses!4v1493240024096"
-                                        width="100%" height="400" frameborder="0" style="border:0"
-                                        allowfullscreen></iframe>
-                                <button class="btn orange darken-1">Guardar</button>
+                                @if($user->extraInfo != null)
+                                    @if($user->extraInfo->location_name != null)
+                                        <p>{{$user->extraInfo->location_name}}</p>
+                                        <iframe
+                                                width="100%"
+                                                height="400"
+                                                frameborder="0" style="border:0"
+                                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDkRw7Dbky34kOXbPFosvrddO6rjKGkrVI&q={{$user->extraInfo->location_name}}"
+                                                allowfullscreen>
+                                        </iframe>
+                                    @endif
+                                @endif
                             </div>
-
                         </div>
                     </li>
                 </ul>
@@ -147,7 +217,7 @@
                         <h5>Ultima Obra</h5>
                         <br/>
                         <img class="z-depth-5 materialboxed responsive-img" height="300" style="margin: auto;"
-                             src='{{url($ultimaObra)}}'>
+                             src='{{url($user->lastObra())}}'>
                     @endif
                 </div>
             </div>
@@ -339,7 +409,7 @@
 
                 var formData = new FormData(form);
 
-                $(this).closest('.row').hide('slow');
+                $(this).closest('.col').hide('slow');
 
                 $.ajax({
                     url: "{{url('/deleteEvent')}}",
@@ -390,6 +460,7 @@
         /*End Document Ready*/
 
     </script>
+
 
 
 

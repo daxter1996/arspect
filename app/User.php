@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -76,4 +77,9 @@ class User extends Authenticatable
     public function extraInfo(){
         return $this->hasOne(ExtraInfo::class);
     }
+
+    public function lastObra(){
+        return 'uploads/profile/' . $this->id . '/obras/' . $this->obras()->orderBy('created_at', 'DESC')->first()->url;
+    }
+
 }

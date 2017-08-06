@@ -40,7 +40,7 @@ class ObraController extends Controller
 
             $newObra->save();
 
-            return redirect('personal');
+            return redirect('home');
         } else {
             return 'NoImage';
         }

@@ -11,10 +11,10 @@
         </div>-->
 
         <div class="col s12" style="min-height: 100%">
+            <div class="row"></div>
             <div class="input-field col s12">
-                <i class="material-icons prefix">search</i>
                 <input id="buscarBtn" type="text" class="validate">
-                <label for="buscarBtn">Artista</label>
+                <label for="buscarBtn">Buscar Artista</label>
             </div>
             <div class="row"></div>
             <br/>
@@ -22,22 +22,21 @@
                 @if(count($users) > 0)
                     @foreach($users as $user)
                         <div class="row">
-                            <div class="col s3">
+                            <div class="col s6 m3">
                                 <img class="responsive-img"
                                      src="{{url('/uploads/profile/' . $user->id . '/' . $user->avatar)}}">
                             </div>
-                            <div class="col s9">
+                            <div class="col s6 m9">
                                 <a href="{{url('/perfil/' . $user->id)}}" class=" black-text">
-                                    <div class="col s12" style="padding: 10px">
+                                    <div class="col s12">
                                         <h4><strong>{{$user->name . " " . $user->surname}}</strong></h4>
                                         @foreach($user->tags as $tag)
-                                            <div class="chip orange lighten-3"><a href=""
-                                                                                  class="black-text">{{$tag->type}}</a>
-                                            </div>
+                                            <div class="chip orange lighten-3"><a href="" class="black-text">{{$tag->type}}</a></div>
                                         @endforeach
                                     </div>
                                 </a>
                             </div>
+
                         </div>
                         <hr/>
                     @endforeach

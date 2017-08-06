@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -19,6 +19,8 @@ class ProfileController extends Controller
     function viewProfile($id){
         $user = User::find($id);
 
+        $user->views = $user->views + 1;
+        $user->update();
         $ultimaObra = $user->obras;
         if (count($ultimaObra) > 0){
             $ultimaObra = 'uploads/profile/' . $user->id . '/obras/' . last(last($ultimaObra))->url;
@@ -50,7 +52,10 @@ class ProfileController extends Controller
     }
 
     public function buscar(Request $request){
-        $users = User::where('type', 2)->where('name','like', '%'.$request->name.'%')->orWhere('surname','like', '%'.$request->name.'%')->get();
+
+        //$users = User::where('type',2)->where('active',1)->where('name','like', '%' . $request->nombre . '%')->get();
+        //$users = User::where('type',2)->raw("where name + ' ' + surname like" . '%' . $request->nombre . '%')->get();
+        $users = User::where('type',2)->whereRaw("concat(name, ' ', surname) like '%" . $request->name . "%'")->get();
         return view('widgets.search')->with('users', $users);
 
     }
@@ -95,5 +100,28 @@ class ProfileController extends Controller
 
     public function removeTag(Request $request){
         return Auth::user()->removeTag($request->tag);
+    }
+
+    public function valid(Request $request){
+
+        $user = User::find($request->user_id);
+
+        $email = $user->email;
+
+        Mail::send('emails.valid', [] ,function ($message) use ($email){
+            $message->from('arspect@arspect.com');
+            $message->subject('Arspect - Perfil Validado');
+            $message->to($email);
+        });
+
+        $user->active = 1;
+        $user->update();
+
+
+        return 'Perfil Validado';
+    }
+
+    public function editLocation(){
+        return view('profiles.editLocation');
     }
 }

@@ -37,13 +37,37 @@
                         <!-- Cartilla Informacio de usuari-->
                         <div class="row">
                             <h3> {{$user->name . " " . $user->surname}} </h3>
-                            <p><span style="font-weight: bold">Tags</span> @foreach($user->tags as $tag)
-                                <div class="chip">{{$tag->type}}</div> @endforeach</p>
+                            <p>
+                                @if(count($user->tags) > 0)
+                                    <span style="font-weight: bold">Tags</span>
+                            @foreach($user->tags as $tag)
+                                <div class="chip">{{$tag->type}}</div>
+                                @endforeach
+                                @endif
+                                </p>
                         </div>
                         <div class="row">
-                            <span style="font-weight: bold">Biografía:</span>
-                            <p>@if($user->extraInfo != null){{$user->extraInfo->biografia}} @endif</p>
+                            <p>
+                                @if($user->extraInfo != null)
+                                    @if($user->extraInfo->biografia != null)
+
+                                        <span style="font-weight: bold">Biografía:</span>
+                                        {{$user->extraInfo->biografia}}
+                                    @endif
+                                @endif
+                            </p>
                         </div>
+                    </div>
+                    <div class="col s12">
+                        <h5>Redes sociales</h5>
+                        @if($user->extraInfo != null)
+                            @if($user->extraInfo->twitter !=null)<a href="http://www.twitter.com/{{$user->extraInfo->twitter}}" target="_blank"><img class="responsive-img" style="height: 47px" src="{{url('/img/twitterB.png')}}"></a>@endif
+                            @if($user->extraInfo->facebook !=null)<a href="http://www.facebook.com/{{$user->extraInfo->facebook}}" target="_blank"><img class="responsive-img" style="height: 50px" src="{{url('/img/facebookB.png')}}"></a>@endif
+                            @if($user->extraInfo->instagram !=null)<a href="http://www.instagram.com/{{$user->extraInfo->instagram}}" target="_blank"><img class="responsive-img" style="height: 50px" src="{{url('/img/instagramB.png')}}"></a>@endif
+                            @if($user->extraInfo->web !=null)<a href="http://{{$user->extraInfo->web}}" target="_blank"><img
+                                        class="responsive-img" style="height: 46px"
+                                        src="{{url('/img/weblogo.png')}}"></a>@endif
+                        @endif
                     </div>
                 </div>
 
@@ -53,49 +77,57 @@
                     <li>
                         <div class="collapsible-header"><i class="material-icons">contact_mail</i>Contactar</div>
                         <div class="collapsible-body">
-                            <form>
+                            <form id="contact">
+                                {{csrf_field()}}
                                 @if(!Auth::user())
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input type="email" placeholder="Email" id="email">
+                                            <input type="email" placeholder="Email" name="email" id="email">
                                             <label for="email"></label>
                                         </div>
                                     </div>
                                 @endif
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <textarea id="textarea1" rows="500" class="materialize-textarea"></textarea>
+                                        <textarea id="textarea1" rows="500" name="motivo"
+                                                  class="materialize-textarea"></textarea>
                                         <label for="textarea1">Motivo</label>
                                     </div>
                                 </div>
-                                <input type="submit" class="btn orange lighten-1">
+                                <input type="hidden" name="emailTo" value="{{$user->email}}">
+                                <input type="submit" id="enviarMail" class="btn orange lighten-1">
                             </form>
+                            <div id="mensage" class="center" style="display: none">
+                                <h5>Gracias por la Consulta</h5>
+                            </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">place</i>Localización</div>
-                        <div class="collapsible-body">
-                            <div style="display: none">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.7776367884426!2d4.652552516016148!3d51.48059577963073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c41c4ed2a6d579%3A0x251c503b97429b04!2sKlein-Zundert%2C+Pa%C3%ADses+Bajos!5e0!3m2!1ses!2ses!4v1493240024096"
-                                        width="100%" height="400" frameborder="0" style="border:0"
-                                        allowfullscreen></iframe>
-                            </div>
-                            <div>
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.7776367884426!2d4.652552516016148!3d51.48059577963073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c41c4ed2a6d579%3A0x251c503b97429b04!2sKlein-Zundert%2C+Pa%C3%ADses+Bajos!5e0!3m2!1ses!2ses!4v1493240024096"
-                                        width="100%" height="400" frameborder="0" style="border:0"
-                                        allowfullscreen></iframe>
-                                <button class="btn orange darken-1">Guardar</button>
-                            </div>
+                    @if($user->extraInfo != null)
+                        @if($user->extraInfo->location_name != null)
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i>Localización</div>
+                                <div class="collapsible-body">
+                                    <div>
 
-                        </div>
-                    </li>
+                                        <p>{{$user->extraInfo->location_name}}</p>
+                                        <iframe
+                                                width="100%"
+                                                height="400"
+                                                frameborder="0" style="border:0"
+                                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDkRw7Dbky34kOXbPFosvrddO6rjKGkrVI&q={{$user->extraInfo->location_name}}"
+                                                allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </li>
+                        @endif
+                    @endif
                 </ul>
                 <div class="col s12 l6 offset-l1 center" style="margin-top: 5%;">
                     @if($user->obras()->count() > 0)
                         <h5>Última Obra</h5>
                         <br/>
-                        <img class="z-depth-5 materialboxed responsive-img" height="300" style="margin: auto;"
-                             src='{{url($ultimaObra)}}'>
+                        <img class="z-depth-5 materialboxed responsive-img" height="300" style="margin: auto;" src='{{url($ultimaObra)}}'>
                     @endif
                 </div>
             </div>
@@ -163,38 +195,100 @@
             });
 
             $('.likeObra').click(function () {
-                var form = $(this).closest('.formObra')[0];
-                var button = $(this);
-                var formData = new FormData(form);
+                addLike($(this));
+            });
 
-                $.ajax({
-                    url: "{{url('/like/add')}}",
-                    type: "POST",
-                    data: formData,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function (data) {
-                        if (data == 1) {
-                            console.log(data);
-                            button.addClass('green');
-                            button.find('i').html('thumb_down');
-                            var likes = parseInt(button.closest('.row').find('.numLikes').html());
-                            button.closest('.row').find('.numLikes').html(likes + 1);
-                        } else {
-                            console.log('dislike');
-                        }
-                    }, error: function (data) {
-                        var error = data.responseJSON;
-                        console.log(error);
-                        $.each(error, function (key, value) {
-                            Materialize.toast(value[0], 4000);
-                        });
-                    }
-                });
+            $('.dislikeObra').click(function () {
+                removeLike($(this));
             });
 
         });//end Document ready
+
+
+        function addLike(formulario) {
+            var form = $(formulario).closest('.formObra')[0];
+            var button = $(formulario);
+            var formData = new FormData(form);
+
+            $.ajax({
+                url: "{{url('/like/add')}}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 1) {
+                        console.log(data);
+                        button.addClass('red');
+                        button.removeClass('likeObra');
+                        button.removeClass('green');
+                        button.addClass('dislikeObra');
+
+                        $(".dislikeObra").unbind("click");
+                        $('.dislikeObra').click(function () {
+                            removeLike(formulario);
+                        });
+
+                        button.find('i').html('thumb_down');
+                        var likes = parseInt(button.closest('.col').find('.numLikes').html());
+                        button.closest('.col').find('.numLikes').html(likes + 1);
+                    } else {
+
+                    }
+                }, error: function (data) {
+                    var error = data.responseJSON;
+                    console.log(error);
+                    $.each(error, function (key, value) {
+                        Materialize.toast(value[0], 4000);
+                    });
+                }
+            });
+        };
+
+        function removeLike(formulario) {
+            var form = $(formulario).closest('.formObra')[0];
+            var button = $(formulario);
+            var formData = new FormData(form);
+
+            $.ajax({
+                url: "{{url('/like/remove')}}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data)
+                    if (data == 1) {
+
+                        button.addClass('green');
+                        button.removeClass('dislikeObra');
+                        button.removeClass('red');
+                        button.addClass('likeObra');
+
+                        $(".likeObra").unbind("click");
+                        $('.likeObra').click(function () {
+                            addLike(formulario);
+                        });
+
+                        button.find('i').html('thumb_up');
+                        var likes = parseInt(button.closest('.col').find('.numLikes').html());
+                        button.closest('.col').find('.numLikes').html(likes - 1);
+
+                    } else {
+
+                    }
+                }, error: function (data) {
+                    var error = data.responseJSON;
+                    console.log(error);
+                    $.each(error, function (key, value) {
+                        Materialize.toast(value[0], 4000);
+                    });
+                }
+            });
+        }
+
 
         $(document).ready(function () {
             $('.tooltipped').tooltip({delay: 50});
@@ -212,7 +306,36 @@
             Materialize.toast("Debes registrarte para dar like", 2000);
         });
 
+        /*Ajax per mailing*/
+        $("#contact").submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var form = $(this);
+            $(form).hide('slow');
+            $.ajax({
+                url: "{{url('/mail/contact')}}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    Materialize.toast(data, 4000);
+                    console.log(data);
+                    $('#mensage').show('slow');
+                }, error: function (data) {
+                    var error = data.responseJSON;
+                    console.log(error);
+                    $.each(error, function (key, value) {
+                        Materialize.toast(value[0], 4000);
+                    });
+                    $(form).show('slow');
+                    $('#mensage').hide('slow');
+                }
+            });
+        });
     </script>
+
 
 
 

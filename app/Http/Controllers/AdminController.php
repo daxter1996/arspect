@@ -15,7 +15,7 @@ class AdminController extends Controller
     }
 
     public function validacion(){
-        $usersNoActive = User::where('active', 0)->get();
+        $usersNoActive = User::where('active', 0)->where('type', 2)->get();
         return view('admin.validacion', compact('usersNoActive'));
     }
 }

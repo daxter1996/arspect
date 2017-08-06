@@ -31,19 +31,28 @@
                     </div>
                     <div class="input-field col s12">
                         <select id="type" name="type">
-                            <option value="1" selected>Coleccionista</option>
-                            <option value="2">Artista</option>
+                            <option value="2" selected>Artista</option>
+                            <option value="1">Coleccionista</option>
                         </select>
                         <label for="type">Tipo de usuario</label>
                     </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="checkbox" id="test5" name="terminos" />
+                            <label for="test5">Acepto los <a class="orange-text bold" href="{{url('/terminos-y-condiciones')}}">Términos y condiciones</a></label>
+                        </div>
+                    </div>
+
+
                     <div class="input-field col s12">
                         <input type="submit" class="btn orange darken-2" value="Registrarse">
                     </div>
                 </form>
             </div>
             @if (count($errors) > 0)
-                <ul class="red lighten-3 z-depth-2" style="border-radius: 5px; padding: 10px">
-                    <strong>Error!</strong>
+                <ul class="red darken-3 white-text z-depth-2" style="border-radius: 5px; padding: 10px">
+                    <strong class="bold">Error!</strong>
                     @foreach($errors->all() as $error)
                         <li>- {{$error}}</li>
                     @endforeach
